@@ -13,24 +13,19 @@ def change_name(name):
     newname = ' - '.join(name.split(' - ')[:2])
     newname = newname.split('(')[0].split('[')[0]
     if newname[-4:] == '.mp3':
-        # print('mp3')
         return newname
     else:
-        # print('other')
         return newname + '.mp3'
-
 
 def change_title(title):
     reg_pre = re.compile(r"([^-]+)\s-\s")
     reg_suf = re.compile(r"(\s\(|\s\[)(.+)")
     title = reg_pre.sub("", title, count=1)
-    # print(f"pre = {title}")
     title = reg_suf.sub("", title, count=1)
     try:
         return title
     except AttributeError:
         print("title error")
-    # print(f"suf = {title}")
 
 for mp3 in file_list:
     audio = eyed3.load(mp3)
