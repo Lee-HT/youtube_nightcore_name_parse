@@ -4,6 +4,7 @@ import eyed3
 import glob
 import re
 import os
+from eyed3.core import Date
 
 path = "D:\\음악\\38\\*.mp3"
 file_list = glob.glob(path)
@@ -38,6 +39,8 @@ for mp3 in file_list:
     #     audio.tag.title = audio.tag.title.split(' - ')[0].split('(')[0].split('[')[0]
     # audio.tag.title =  audio.tag.title.split(' - ')[-1]
 
+    # modifying
+    # audio.tag.setDate(datetime.datetime.now().year)
     print(f"{audio.tag.title}")
     audio.tag.artist = "nightcore"
     audio.tag.save()
