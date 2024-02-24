@@ -1,12 +1,10 @@
-import datetime
-
 import eyed3
 import glob
 import re
 import os
-from eyed3.core import Date
 
-path = "D:\\음악\\38\\*.mp3"
+extension = "mp3"
+path = f"D:\\음악\\39\\*.{extension}"
 file_list = glob.glob(path)
 
 
@@ -28,23 +26,19 @@ def change_title(title):
     except AttributeError:
         print("title error")
 
-for mp3 in file_list:
-    audio = eyed3.load(mp3)
-    print(f"{audio.tag.title} >>> ", end="")
-    audio.tag.title = change_title(audio.tag.title)
+print("files :",file_list)
+for music in file_list:
+    if extension == "mp3":
+        audio = eyed3.load(music)
+        print(f"{audio.tag.title} >>> ", end="")
+        audio.tag.title = change_title(audio.tag.title)
+        print(f"{audio.tag.title}")
+        audio.tag.artist = "nightcore"
+        audio.tag.save()
+    else:
+        pass
 
-    # try:
-    #     audio.tag.title = audio.tag.title.split(' - ')[1].split('(')[0].split('[')[0]
-    # except IndexError:
-    #     audio.tag.title = audio.tag.title.split(' - ')[0].split('(')[0].split('[')[0]
-    # audio.tag.title =  audio.tag.title.split(' - ')[-1]
-
-    # modifying
-    # audio.tag.setDate(datetime.datetime.now().year)
-    print(f"{audio.tag.title}")
-    audio.tag.artist = "nightcore"
-    audio.tag.save()
     try:
-        os.rename(mp3, change_name(mp3))
+        os.rename(music, change_name(music))
     except FileExistsError:
         "already file exist"
